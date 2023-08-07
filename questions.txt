@@ -12,16 +12,10 @@ with 8 features.
 i) Perform any clustering of your choice to determine the optimal # of clusters in the data
 ii) Using the result of i) assign clusters labels to each sample, so each sample's label is the
 cluster to which it belongs. Using these labels as the exact labels, you now have a labeled dataset.
-
-
 Build a classification model that classifies a sample with its corresponding label. Use multinomial 
 regression as a benchmark model, and any ML model (trees, forests, SVM, NN etc.) as a comparison model.
 Comment on which does better and why.
 
-to see if the ML model is correct 
-	-NN is overkill for only 8 variables 
-	-want forests over trees because overfitting is a problem with trees (doesnt generalize on data not seen)
-		forests has overfitting in mind 
 
 2) Prediction + filtering
 --------------------------
@@ -31,9 +25,7 @@ Attached are 3 files: xvalsSine.csv, cleanSine.csv and noisySine.csv. xvalsSine.
 x values mentioned earlier. noisySine.csv contains sine(x) corrupted by noise. 
 i) Using xvalsSine.csv and cleanSine.csv as a labeled dataset (x,sine(x)) being (value,label) with a
 random train/test split of 0.7/0.3, build an OLS regression model (you may want to use polynomial
-basis of a sufficiently large order). - use like x^2 and x^3 
-	-how it predicts outside training sample since might over fit training data 
-	-test is data the model hasnt seen before 
+basis of a sufficiently large order). 
 (bonus) If you used the normal equations to solve the OLS problem, can you redo it with stochastic
 gradient descent?
 
@@ -42,7 +34,6 @@ gradient descent?
 ii) Now, assume you are given the noisySine.csv as a time series with the values of 
 xvalsSine.csv being the time variable. Filter the noisySine.csv data with any filter of your choice
 and compare against cleanSine.csv to report the error.
-	ask katie/time series 
 (bonus) Can you code a Kalman filter to predict out 10 samples from the noisySine.csv data?
 
 3) Time series with pi
@@ -68,11 +59,3 @@ def genPiAppxDigits(numdigits,appxAcc):
 	getcontext().prec = numdigits
 	mypi = (Decimal(4) * sum(-Decimal(k%4 - 2) / k for k in range(1, 2*appxAcc+1, 2)))
 	return mypi
-
-
-
-
-	-no cant use results to conclude is irrational
-	-no guarantee this will continue to be accurate even if million numbers from now 
-	-even if model isnt predictive but could be another model 
-	-index it to make it a dataset?
