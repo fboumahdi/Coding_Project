@@ -113,9 +113,11 @@ print("Accuracy of Random Forest: ", accuracy_rforest)
 """
 Normally, a Random Forest Model would be the better model for the classification model
 instead of the Multinomial Regression.
-
-Despite changing the train/test split to 0.01/0.99, the accuracy is still 1.0. 
-In this case, either model would work to predict the cluster labels accurately.
+Since the cluster labels are kmeans, which should perfectly linearly searate the data
+into a linear model, then we can achieve 100% accuracy.
+Despite changing the train/test split to different combinations including 0.01/0.99, 
+the accuracy is still 1.0. In this case, either model would work to predict 
+the cluster labels accurately.
 
 
 
