@@ -112,12 +112,16 @@ print("Accuracy of Random Forest: ", accuracy_rforest)
 #%% 
 """
 Normally, a Random Forest Model would be the better model for the classification model
-instead of the Multinomial Regression.
+instead of the Multinomial Regression. Random Forest is better because it's less senstitive 
+to outliers compared to Multinomial. Another reason why Random Forest is better is because it
+has multiple trees where each tree is trained on a random subset which makes it better than using
+a Trees model where overfitting is an issue. Since Multinomial Regression is also a single model, 
+it's also prone to overfitting.
 Since the cluster labels are kmeans, which should perfectly linearly searate the data
-into a linear model, then we can achieve 100% accuracy.
-Despite changing the train/test split to different combinations including 0.01/0.99, 
-the accuracy is still 1.0. In this case, either model would work to predict 
-the cluster labels accurately.
+into a linear model, then we can achieve 100% accuracy.Despite changing the train/test
+split to different combinations including 0.01/0.99, the accuracy is still 1.0. 
+In this case, either model would work to predict 
+the cluster labels accurately with this dataset.
 
 
 
