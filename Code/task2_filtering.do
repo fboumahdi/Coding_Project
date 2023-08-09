@@ -128,6 +128,11 @@ and compare against cleanSine.csv to report the error.
 	local mse = r(mean)
 	display "Mean Squared Error: `mse'" 
 	//we get a low mse so the filtering is accurate
+
+	//an additional check is to look at the absolute value of the 
+	//difference between filtered sine(x) and clean sine(x)
+	gen difference_noisy_clean = abs(sine_x - filtered_noisy_sine_x)
+	//the mean difference is 0.047 
 exit 
 
 	
