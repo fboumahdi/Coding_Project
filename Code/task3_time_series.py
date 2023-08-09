@@ -127,9 +127,9 @@ print("Accuracy: ", accuracy_all)
 
 #%%
 """
-Based on the results, the forecasting model only predicted 10% of the next 50 
-digits accurately. There is no guarantee that this will continue to be more 
-accurate, even if we predict the next million numbers from now.
+Based on the results, the forecasting model only predicted a low percentage of 
+the next 50 digits accurately. There is no guarantee that this will continue 
+to be more accurate, even if we predict the next million numbers from now.
 Since the accuracy of the model is low, there could be another model that is
 more predictive, but it will still not be able to predict all the values of pi.
 In this case, we cannot use the results to conclude pi is irrational because 
