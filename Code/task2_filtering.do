@@ -127,34 +127,7 @@ and compare against cleanSine.csv to report the error.
 	sum squared_diff
 	local mse = r(mean)
 	display "Mean Squared Error: `mse'" 
-exit 		
-
-*****************************************************************************	
-// a Kalman filter to predict out 10 samples from the noisySine.csv
-	
-	sspace create noisy_sine, statevar(x_state) measurement(noisy_sine)
-	
-	//set initial values for Kalman filter
-	scalar initial_state = 0 
-	scalar initial_state_variance = 1
-	
-	//Initialize the state space model 
-	sspace init noisy_sine, x_state(`initial_state') P_state(`initial_state_variance')
-	
-	//Update the state space model with data 
-	foreach t for numlist = 1/_N{
-		sspace update noisy_sine, y(x[`t'])
-	}
-	
-	//Predict the next 10 samples
-	forval t = `=_N' + 1 / `=_N' + 10 {
-		sspace predict noisy_sine, hor(1) y(next_x) replace 
-	}
-	
-	//Display the predicted values 
-	list x next_x if _n > `=_N'
-
-
+exit 
 
 	
 	
