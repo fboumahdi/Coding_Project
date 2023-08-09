@@ -127,6 +127,7 @@ and compare against cleanSine.csv to report the error.
 	sum squared_diff
 	local mse = r(mean)
 	display "Mean Squared Error: `mse'" 
+	//we get a low mse so the filtering is accurate
 exit 
 
 	
