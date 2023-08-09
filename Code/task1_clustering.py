@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Aug  8 09:54:40 2023
-
 @author: b1fxb03
 
 1) Unsupervised + supervised learning.
