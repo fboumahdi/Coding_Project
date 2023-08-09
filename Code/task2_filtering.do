@@ -67,13 +67,12 @@ and compare against cleanSine.csv to report the error.
 	splitsample x sine_x, split(70 30) gen(sample)
    
 *****************************************************************************	
-//making polynomial x variables
-	forvalues power = 2/16 {
+//making polynomial x variables and finding the optimal polynomial for the regression
+local power = 16
+	forvalues power = 2/`power' {
 		gen x_`power' = x^`power'
 	}
-	//16 is the best because when comparing sine_x and prediction, it has
-	//the most matches 
-  
+   
 *****************************************************************************	
 //build an OLS regression model
 	
@@ -85,6 +84,10 @@ and compare against cleanSine.csv to report the error.
 	predict x_prediction if sample == 2
 	
 	sort x_prediction
+	
+	//16 is the best because when comparing sine_x and prediction, it has
+	//the most matches after looping through powers of 2 through 20
+	compare sine_x x_prediction
 	
 	//calculating accuracy of model using mean squared error 
 	//https://stats.stackexchange.com/questions/41695/what-is-the-root-mse-in-stata
