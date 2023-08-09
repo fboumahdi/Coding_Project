@@ -51,6 +51,10 @@ else:
 chdir( directory )
 
  #%%  
+
+ #setting the seed
+ np.random.seed(42)
+ 
  #defining the function
 def genPiAppxDigits(numdigits,appxAcc):
     getcontext().prec = numdigits
@@ -123,7 +127,7 @@ print("Accuracy: ", accuracy_all)
 
 #%%
 """
-Based on the results, the forecasting model only predicted 16% of the next 50 
+Based on the results, the forecasting model only predicted 10% of the next 50 
 digits accurately. There is no guarantee that this will continue to be more 
 accurate, even if we predict the next million numbers from now.
 Since the accuracy of the model is low, there could be another model that is
