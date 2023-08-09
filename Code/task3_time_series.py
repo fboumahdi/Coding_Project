@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Aug  2 16:22:34 2023
-
 @author: b1fxb03
-
 
 3) Time series with pi
 -----------------------
@@ -16,7 +13,6 @@ Treat each of the 1000 resulting digits of pi as the value of a time series. Thu
 of pi for n=1,1000. Build a simple time series forecasting model (any model of your choice)
 that predicts the next 50 digits of pi. Report your accuracy. Using your results, can
 you conclude that pi is irrational? If so, how?
-
 
 (bonus) Now let's vary appxAcc to be 1000,5000,10000,50000,100000 with fixed numdigits=1000. You thus
 have 5 time series, each corresponding to a value of appxAcc. Can you find the pairwise correlation
@@ -86,7 +82,7 @@ for i in range(len(sequence) - sequence_length):
 X = np.array(X)
 y = np.array(y)
 
-# Build the RNN model
+# Building the RNN model
 model = Sequential([
     SimpleRNN(64, input_shape=(sequence_length, 1), activation='relu'),
     Dense(num_unique_digits, activation='softmax')
@@ -94,7 +90,7 @@ model = Sequential([
 
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-# Train the model
+# Training the model
 model.fit(X.reshape(-1, sequence_length, 1), y, epochs=1000)
 
 # Generate predictions for the next 50 digits
@@ -122,26 +118,32 @@ print("Accuracy: ", accuracy_last50)
 #this calculates the accuracy of all 1050 digits
 accuracy_all = accuracy_score(list(calculated_sequence), list(predicted_sequence))
 print("Accuracy: ", accuracy_all)
+#More of a sanity check to confirm the first 1000 digits of the sequence are the same 
+#and has a very high accuracy 
 
 #%%
 """
-Based on the results, 
+Based on the results, the forecasting model only predicted 16% of the next 50 
+digits accurately. There is no guarantee that this will continue to be more 
+accurate, even if we predict the next million numbers from now.
+Since the accuracy of the model is low, there could be another model that is
+more predictive, but it will still not be able to predict all the values of pi.
+In this case, we cannot use the results to conclude pi is irrational because 
+the model is limited and relies on patterns.
 Since pi is irrational, the decimal representation goes without repeating. As a
-result, the next digits cannot be predicted accurately using a finite model.
+result, the next digits cannot be predicted accurately using a finite model, but
+it aids in our understanding that irrational numbers are not predictable and are
+non-repeating in nature.
 """
-#%% this is the bonus question 
-
-def genPiAppxDigits(numdigits, appxAcc):
-    getcontext().prec = numdigits
-    mypi = (Decimal(4) * sum(-Decimal(k%4 - 2) / k for k in range(1, 2*appxAcc+1, 2)))
-    return str(mypi)[2:]  # Convert Decimal to string and remove the "0."
+#%% this is the bonus question that looks at 5 time series
 
 # Generate the sequence using the genPiAppxDigits function
 numdigits = 1000
 appxAcc_values = [1000, 5000, 10000, 50000, 100000]
 
 for appxAcc in appxAcc_values:
-    pi_sequence = genPiAppxDigits(numdigits, appxAcc)
+    pi_value = genPiAppxDigits(numdigits, appxAcc)
+    pi_sequence = str(pi_value)[0:]
 
     # Convert the sequence into a numerical representation
     unique_digits = sorted(set(pi_sequence))
@@ -184,20 +186,7 @@ for appxAcc in appxAcc_values:
 
     print("AppxAcc: ", appxAcc, "Predicted sequence: ", predicted_sequence)
 
-#%% 
-# Calculate pairwise correlations
-correlations = np.zeros((len(appxAcc_values), len(appxAcc_values)))
-for i, j in combinations(range(len(appxAcc_values)), 2):
-    sequence1 = np.array([int(digit) for digit in pi_sequence[i]])
-    sequence2 = np.array([int(digit) for digit in pi_sequence[j]])
-    correlation, _ = pearsonr(sequence1, sequence2)
-    correlations[i, j] = correlation
-
-#%%
-# Print pairwise correlations
-print("Pairwise Correlations:")
-for i in range(len(appxAcc_values)):
-    for j in range(i + 1, len(appxAcc_values)):
-        print(f"appxAcc {appxAcc_values[i]} vs appxAcc {appxAcc_values[j]}: {correlations[i, j]:.4f}")
-
-#%%
+"""
+I ran out of time to complete the bonus, so it is missing the pair wise 
+correlation portion.
+"""
